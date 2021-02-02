@@ -64,7 +64,7 @@ class Board {
         } else {
             out = "     "
             for(let i = 0; i < len; i++) 
-                out += (i + 1) + "    ";
+                out += i + "    ";
         }
 
         console.log(out);
@@ -87,6 +87,23 @@ class Board {
             console.log(out);
 
         }
+    }
+
+    flagBomb(x, y, flag) {
+        if(this.boardArray[x][y].isFlag())
+            this.flaggedBombs++;
+        else
+            this.flaggedBombs--;  
+    }
+
+    checkPos(x, y, flag = false) {
+        console.log(this.boardArray[x][y].getValue());
+        if (flag) {
+            this.boardArray[x][y].makeFlag();
+            if (this.boardArray[x][y].getValue() == 'X')
+                this.flagBomb(x, y, flag);
+        }
+        
     }
 }
 

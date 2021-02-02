@@ -6,8 +6,8 @@ class UI {
         this.diff = this.getDifficulty();
         let b = new Board(this.diff, this.diff);
         this.b = b;
-        this.generalInput();
         b.printBoard();
+        this.generalInput();
     }
 
     getDifficulty() {
@@ -23,10 +23,15 @@ class UI {
 
     generalInput() {
         let action = "N/A";
+        let x = NaN, y = NaN;
         while (action != "flag" && action != "")
             action = readline.question("Would you like to flag a box or guess? Type 'flag' or press enter to guess:    ");
-        console.log("You picked " + action);
-        // Add logic in board for a picked square
+        // The following to while loops used help from https://stackoverflow.com/questions/19048507/how-to-check-for-datatype-in-node-js-specifically-for-integer
+        while (isNaN(x))
+            x = parseInt(readline.question("Enter a row:    "));
+        while (isNaN(y))
+            y = parseInt(readline.question("Enter a column:    "));
+        this.b.checkPos(x, y, true)
     }
 
     isWinner() {

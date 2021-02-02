@@ -2,6 +2,7 @@ class Square {
     constructor() {
         this.visible = true;
         this.value = 0;
+        this.flag = false;
     }
 
     setValue(value) {
@@ -19,6 +20,14 @@ class Square {
 
     makeVisible() {
         this.visible = true;
+    }
+
+    makeFlag() {
+        this.flag = !this.flag;
+    }
+
+    isFlag() {
+        return this.flag;
     }
 }
 
