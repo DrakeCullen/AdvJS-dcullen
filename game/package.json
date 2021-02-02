@@ -11,5 +11,8 @@
     "url": "https://github.com/DrakeCullen/AdvJS-dcullen/tree/main/game"
   },
   "author": "Drake Cullen",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "readline-sync": "^1.4.10"
+  }
 }
