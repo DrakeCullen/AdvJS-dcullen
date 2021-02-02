@@ -11,12 +11,18 @@ class Player {
         console.log("Try again! Your total score was ")
     }
 
+    winner() {
+        console.log("You won! Your score was . Lets see if you made it on the leaderboard!")
+    }
+
     play() {
         while(this.alive && !this.u.isWinner()) {
             this.alive = this.u.generalInput();
         }
-        if(!this.alive)
+        if (!this.alive)
             this.lose();
+        else 
+            this.winner();
     }
 }
 

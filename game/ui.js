@@ -17,9 +17,9 @@ class UI {
             diff = readline.question("Choose a difficulty: easy, medium, or hard:       ");
         }
         console.clear();
-        if (diff == "easy") return 8;
-        else if (diff == "medium") return 12;
-        return 16;
+        if (diff == "easy") return 6;
+        else if (diff == "medium") return 8;
+        return 12;
     }
 
     chooseFlag() {
@@ -43,7 +43,7 @@ class UI {
     generalInput() {
         this.b.printBoard();
         let action = this.chooseFlag();
-        let[x, y] = this.chooseCoords();
+        let [x, y] = this.chooseCoords();
         //console.clear();
         return this.b.checkPos(x, y, action);
     }
