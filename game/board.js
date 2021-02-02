@@ -4,10 +4,20 @@ class Board {
     constructor(rows = 12 , columns = 12) {
         this.rows = rows;
         this.columns = columns;
+        this.flaggedBombs = 0;
+        this.bombs = 0;
         this.createBombs();
         this.countNearBombs();
     }
 
+    getBombs() {
+        return this.bombs;
+    }
+
+    getFlaggedBombs() {
+        return this.flaggedBombs;
+    }
+    
     isValidPos(x, y) {
         return x >= 0 && x < this.columns && y >= 0 && y < this.rows;
     }
@@ -17,8 +27,10 @@ class Board {
         for(let i = 0; i < this.rows; i++) {
             for (let j = 0; j < this.columns; j++) {
                 let s = new Square();
-                if (Math.floor((Math.random() * this.rows) + 1) < this.rows / 4)
+                if (Math.floor((Math.random() * this.rows) + 1) < this.rows / 4) {
                     s.setValue(-1);
+                    this.bombs++;
+                }
                 this.boardArray[i][j] = s;
             }
         }
