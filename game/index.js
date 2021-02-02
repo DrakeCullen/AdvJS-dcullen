@@ -22,6 +22,7 @@ while(playing) {
         - This will be used for score
     * Make it so that the player can read and write to file
         - Maybe keep track of top 5 scores?
-    
+    * Read in row and columns after selecting flag or select
+        - Can you input two ints at once?
 
 */
