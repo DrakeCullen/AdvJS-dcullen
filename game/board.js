@@ -96,14 +96,21 @@ class Board {
             this.flaggedBombs--;  
     }
 
+    clearSorroundingSquares(x, y) {
+
+    }
+
     checkPos(x, y, flag = false) {
-        console.log(this.boardArray[x][y].getValue());
         if (flag) {
             this.boardArray[x][y].makeFlag();
             if (this.boardArray[x][y].getValue() == 'X')
                 this.flagBomb(x, y, flag);
+        } else {
+            if(this.boardArray[x][y].getValue() == 'X' || this.boardArray[x][y] == -1) return false;
+            else if (this.boardArray[x][y].getValue() == 0) this.clearSorroundingSquares(x, y);
+            else console.log(this.boardArray[x][y].getValue());
         }
-        
+        return true;
     }
 }
 

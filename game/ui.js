@@ -21,17 +21,30 @@ class UI {
         return 16;
     }
 
-    generalInput() {
+    chooseFlag() {
         let action = "N/A";
-        let x = NaN, y = NaN;
         while (action != "flag" && action != "")
             action = readline.question("Would you like to flag a box or guess? Type 'flag' or press enter to guess:    ");
+        if (action == "flag") return true;
+        return false;
+    }
+
+    chooseCoords() {
+        let x = NaN, y = NaN;
         // The following to while loops used help from https://stackoverflow.com/questions/19048507/how-to-check-for-datatype-in-node-js-specifically-for-integer
         while (isNaN(x))
             x = parseInt(readline.question("Enter a row:    "));
         while (isNaN(y))
             y = parseInt(readline.question("Enter a column:    "));
-        this.b.checkPos(x, y, true)
+        return [x, y];
+    }
+
+    generalInput() {
+        let action = this.chooseFlag();
+        let[x, y] = this.chooseCoords();
+        let res = this.b.checkPos(x, y, action);
+        console.log(res);
+        return res;
     }
 
     isWinner() {

@@ -7,10 +7,15 @@ class Player {
         this.alive = true;
     }
 
+    lose() {
+        console.log("Try again! Your total score was ")
+    }
+
     play() {
         while(this.alive && !this.u.isWinner()) {
-            this.u.generalInput();
+            this.alive = this.u.generalInput();
         }
+        this.lose();
     }
 }
 

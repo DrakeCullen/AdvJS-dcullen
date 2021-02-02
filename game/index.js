@@ -15,7 +15,6 @@ while(playing) {
     What to add:
     * Alter board when flag or selected
         - Lose if bomb selected
-        - Add one to flagged bombs if bomb successfully flaged
         - If a 0 is selected, clear out all sorrounding zeros
         - If non-zero value selected, show value
     * Create some sort of time function in player
@@ -23,5 +22,8 @@ while(playing) {
     * Make it so that the player can read and write to file
         - Maybe keep track of top 5 scores?
 
+
+    Bugs:
+    * If you choose a bomb on your first play, you dont lose..
 
 */
