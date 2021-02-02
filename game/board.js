@@ -96,18 +96,28 @@ class Board {
             this.flaggedBombs--;  
     }
 
-    clearSorroundingSquares(x, y) {
-
+    clearSorroundingZeros(x, y, dx, dy) {
+        this.boardArray[x][y].makeVisible();
+        for (let dir = 0; dir < 4; dir++) {
+            if(this.isValidPos(x + dx[dir], y + dy[dir])) {
+                if (this.boardArray[x + dx[dir]][y + dy[dir]].getValue() == 0  && this.boardArray[x + dx[dir]][y + dy[dir]].isVisible() == false) {
+                    this.clearSorroundingZeros(x + dx[dir], y + dy[dir], dx, dy);
+                }
+            }
+        }
+        return;
     }
 
     checkPos(x, y, flag = false) {
+        const dx = new Array(-1, 0, 0, 1, -1, -1, 1, -1);
+        const dy = new Array(0, 1, -1, 0, 1, -1, 1, -1);
         if (flag) {
             this.boardArray[x][y].makeFlag();
             if (this.boardArray[x][y].getValue() == -1)
                 this.flagBomb(x, y, flag);
         } else {
             if(this.boardArray[x][y].getValue() == -1) return false;
-            else if (this.boardArray[x][y].getValue() == 0) this.clearSorroundingSquares(x, y);
+            else if (this.boardArray[x][y].getValue() == 0) this.clearSorroundingZeros(x, y, dx, dy);
             else this.boardArray[x][y].makeVisible();
         }
         return true;

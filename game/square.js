@@ -13,6 +13,10 @@ class Square {
         return this.value;
     }
 
+    isVisible() {
+        return this.visible;
+    }
+    
     makeVisible() {
         this.visible = true;
     }
