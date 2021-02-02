@@ -1,6 +1,6 @@
 class square {
     constructor() {
-        this.visible = false;
+        this.visible = true;
         this.value = 0;
     }
 
@@ -9,7 +9,12 @@ class square {
     }
 
     getValue() {
-        return this.value;
+        if (this.visible) {
+            if(this.value == -1)
+                return 'X';
+            return this.value;
+        }
+        return '?';
     }
 
     makeVisible() {
@@ -19,13 +24,47 @@ class square {
 
 class board {
     constructor(rows = 12 , columns = 12) {
+        
         this.rows = rows;
         this.columns = columns;
+        this.createBombs();
+        this.countNearBombs();
+    }
+
+    isValidPos(x, y) {
+        return x >= 0 && x < this.columns && y >= 0 && y < this.rows;
+    }
+
+    createBombs() {
         this.boardArray = Array.from(Array(this.rows), () => new Array(this.columns));
         for(let i = 0; i < this.rows; i++) {
             for (let j = 0; j < this.columns; j++) {
                 let s = new square();
+                if (Math.floor((Math.random() * this.rows) + 1) < this.rows / 4)
+                    s.setValue(-1);
                 this.boardArray[i][j] = s;
+            }
+        }
+    }
+
+    countNearBombs() {
+        let dx = [-1, -1, -1, 0, 0, 1, 1, 1];
+        let dy = [-1, 0, 1, -1, 1, -1, 0, 1];
+        let count;
+        for(let i = 0; i < this.rows; i++) {
+            for (let j = 0; j < this.columns; j++) {
+                count = 0;
+                if(this.boardArray[i][j].getValue() != 'X') {
+                    for (let dir = 0; dir < 8; dir++) {
+                        if(this.isValidPos(i + dx[dir], j + dy[dir])) {
+                            if(this.boardArray[i + dx[dir]][j + dy[dir]].getValue() == 'X')
+                                count++;
+                        }
+                    }
+                    this.boardArray[i][j].setValue(count);
+                
+                }
+                
             }
         }
     }
