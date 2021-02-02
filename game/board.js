@@ -2,7 +2,6 @@ const Square = require('./square.js')
 
 class Board {
     constructor(rows = 12 , columns = 12) {
-        
         this.rows = rows;
         this.columns = columns;
         this.createBombs();
@@ -26,8 +25,8 @@ class Board {
     }
 
     countNearBombs() {
-        let dx = [-1, -1, -1, 0, 0, 1, 1, 1];
-        let dy = [-1, 0, 1, -1, 1, -1, 0, 1];
+        const dx = new Array(-1, -1, -1, 0, 0, 1, 1, 1);
+        const dy = new Array(-1, 0, 1, -1, 1, -1, 0, 1);
         let count;
         for(let i = 0; i < this.rows; i++) {
             for (let j = 0; j < this.columns; j++) {
@@ -58,6 +57,7 @@ class Board {
 
         console.log(out);
     }
+
     printBoard() {
         let out = "";
         this.printSep(this.columns, '')
