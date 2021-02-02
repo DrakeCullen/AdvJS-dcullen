@@ -30,31 +30,27 @@ class board {
         }
     }
 
-    printSep(len, sep = '', newLine = true, count = true) {
+    printSep(len, sep = '', count = true) {
         let out = "";
-        if(newLine) {
-            for(let i = 0; i < len; i++) {
-                if(!count)
-                    out += sep + sep + sep + sep + sep;
-                else out += (i + 1) + "    ";
-            }
-            console.log(out);
+        if(!count) {
+            for(let i = 0; i < len; i++) 
+                    out += sep + sep + sep + sep + sep + sep;
         } else {
-            for(let i = 0; i < len; i++) {
-                if(!count)
-                    counsole.log("${sep} ");
-                else 
-                    console.log("${i} ");
-            }
+            out = "     "
+            for(let i = 0; i < len; i++) 
+                out += (i + 1) + "    ";
         }
+
+        console.log(out);
     }
     printBoard() {
         let out = "";
         this.printSep(this.columns, '')
-        this.printSep(this.columns, '-', true, false)
+        this.printSep(this.columns, '-', false)
         
         for(let i = 0; i < this.rows; i++) {
-            
+            if (i < 10) out = i + "  | ";
+            else out = i + " | ";
             for (let j = 0; j < this.columns; j++) {
                 if (j < 9)
                     out += this.boardArray[i][j].getValue() + "    ";
@@ -62,7 +58,7 @@ class board {
                     out += this.boardArray[i][j].getValue() + "     ";
             }
             console.log(out);
-            out = "";
+
         }
     }
 }
