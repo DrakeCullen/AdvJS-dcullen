@@ -43,10 +43,10 @@ class Board {
         for(let i = 0; i < this.rows; i++) {
             for (let j = 0; j < this.columns; j++) {
                 count = 0;
-                if(this.boardArray[i][j].getValue() != 'X') {
+                if(this.boardArray[i][j].getValue() != -1) {
                     for (let dir = 0; dir < 8; dir++) {
                         if(this.isValidPos(i + dx[dir], j + dy[dir])) {
-                            if(this.boardArray[i + dx[dir]][j + dy[dir]].getValue() == 'X')
+                            if(this.boardArray[i + dx[dir]][j + dy[dir]].getValue() == -1)
                                 count++;
                         }
                     }
@@ -80,9 +80,9 @@ class Board {
             else out = i + " | ";
             for (let j = 0; j < this.columns; j++) {
                 if (j < 9)
-                    out += this.boardArray[i][j].getValue() + "    ";
+                    out += this.boardArray[i][j].printSquare() + "    ";
                 else 
-                    out += this.boardArray[i][j].getValue() + "     ";
+                    out += this.boardArray[i][j].printSquare() + "     ";
             }
             console.log(out);
 
@@ -103,14 +103,23 @@ class Board {
     checkPos(x, y, flag = false) {
         if (flag) {
             this.boardArray[x][y].makeFlag();
-            if (this.boardArray[x][y].getValue() == 'X')
+            if (this.boardArray[x][y].getValue() == -1)
                 this.flagBomb(x, y, flag);
         } else {
-            if(this.boardArray[x][y].getValue() == 'X' || this.boardArray[x][y] == -1) return false;
+            if(this.boardArray[x][y].getValue() == -1) return false;
             else if (this.boardArray[x][y].getValue() == 0) this.clearSorroundingSquares(x, y);
-            else console.log(this.boardArray[x][y].getValue());
+            else this.boardArray[x][y].makeVisible();
         }
         return true;
+    }
+
+    // For testing purposes
+    makeAllVisible() {
+        for(let i = 0; i < this.rows; i++) {
+            for (let j = 0; j < this.columns; j++) {
+                this.boardArray[i][j].makeInvisible();
+            }
+        }
     }
 }
 

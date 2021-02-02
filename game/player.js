@@ -15,7 +15,8 @@ class Player {
         while(this.alive && !this.u.isWinner()) {
             this.alive = this.u.generalInput();
         }
-        this.lose();
+        if(!this.alive)
+            this.lose();
     }
 }
 

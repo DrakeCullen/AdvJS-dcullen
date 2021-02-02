@@ -10,12 +10,7 @@ class Square {
     }
 
     getValue() {
-        if (this.visible) {
-            if(this.value == -1)
-                return 'X';
-            return this.value;
-        }
-        return '?';
+        return this.value;
     }
 
     makeVisible() {
@@ -28,6 +23,21 @@ class Square {
 
     isFlag() {
         return this.flag;
+    }
+
+    printSquare() {
+        if (this.visible) {
+            if(this.value == -1)
+                return 'X';
+            return this.value;
+        } else if(this.flag)
+            return '*';
+        return '?';
+    }
+
+    //For testing
+    makeInvisible() {
+        this.visible = false;
     }
 }
 

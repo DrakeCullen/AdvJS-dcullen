@@ -6,8 +6,9 @@ class UI {
         this.diff = this.getDifficulty();
         let b = new Board(this.diff, this.diff);
         this.b = b;
-        b.printBoard();
-        this.generalInput();
+        //Delete These!
+        this.b.printBoard();
+        this.b.makeAllVisible();
     }
 
     getDifficulty() {
@@ -40,11 +41,11 @@ class UI {
     }
 
     generalInput() {
+        this.b.printBoard();
         let action = this.chooseFlag();
         let[x, y] = this.chooseCoords();
-        let res = this.b.checkPos(x, y, action);
-        console.log(res);
-        return res;
+        //console.clear();
+        return this.b.checkPos(x, y, action);
     }
 
     isWinner() {
