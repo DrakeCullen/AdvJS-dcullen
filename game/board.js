@@ -1,28 +1,6 @@
-class square {
-    constructor() {
-        this.visible = true;
-        this.value = 0;
-    }
+const Square = require('./square.js')
 
-    setValue(value) {
-        this.value = value;
-    }
-
-    getValue() {
-        if (this.visible) {
-            if(this.value == -1)
-                return 'X';
-            return this.value;
-        }
-        return '?';
-    }
-
-    makeVisible() {
-        this.visible = true;
-    }
-}
-
-class board {
+class Board {
     constructor(rows = 12 , columns = 12) {
         
         this.rows = rows;
@@ -39,7 +17,7 @@ class board {
         this.boardArray = Array.from(Array(this.rows), () => new Array(this.columns));
         for(let i = 0; i < this.rows; i++) {
             for (let j = 0; j < this.columns; j++) {
-                let s = new square();
+                let s = new Square();
                 if (Math.floor((Math.random() * this.rows) + 1) < this.rows / 4)
                     s.setValue(-1);
                 this.boardArray[i][j] = s;
@@ -62,9 +40,7 @@ class board {
                         }
                     }
                     this.boardArray[i][j].setValue(count);
-                
                 }
-                
             }
         }
     }
@@ -102,5 +78,4 @@ class board {
     }
 }
 
-let b = new board();
-b.printBoard();
+module.exports = Board;
