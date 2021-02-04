@@ -26,6 +26,10 @@ class UI {
         return 12;
     }
 
+    getStats() {
+        return [this.b.getBombs(), this.b.getFlaggedBombs()];
+    }
+
     chooseFlag() {
         let action = "N/A";
         while (action != '1' && action != '2') {
@@ -40,14 +44,13 @@ class UI {
     }
 
     chooseCoords() {
-        let x = NaN,
-            y = NaN;
-        // The following to while loops used help from https://stackoverflow.com/questions/19048507/how-to-check-for-datatype-in-node-js-specifically-for-integer
-        while (isNaN(x)) {
+        let x = -1;
+        let y = -1;
+        while (x >= this.b.getRows() || x < 0) {
             console.log("Enter a row: ")
             x = parseInt(readline.question("> "));
         }
-        while (isNaN(y)) {
+        while (y >= this.b.getColumns() || y < 0) {
             console.log("Enter a column: ")
             y = parseInt(readline.question("> "));
         }

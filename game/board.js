@@ -20,6 +20,14 @@ class Board {
         return this.flaggedBombs;
     }
 
+    getRows() {
+        return this.rows;
+    }
+
+    getColumns() {
+        return this.columns;
+    }
+
     isValidPos(x, y) {
         return x >= 0 && x < this.columns && y >= 0 && y < this.rows;
     }
