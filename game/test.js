@@ -10,37 +10,6 @@ class Player {
         this.readPlayers();
     }
 
-    readPlayers() {
-        let input = require('fs').readFileSync('users.txt', 'utf-8').split('\n').filter(Boolean);
-        this.players = {};
-        let name, score;
-        for (let line of input) {
-            [name, score] = line.split(" ");
-            this.players[name] = parseFloat(score);
-        }
-    }
-    createPlayer() {
-        console.log("Choose a username (Don't use any spaces).");
-        this.name = readline.question("> ");
-        this.score = 0;
-        fs.appendFileSync("users.txt", `${this.name} ${this.score} \n`);
-    }
-
-    getPlayer() {
-        let valid = false;
-        console.log("What is your username?");
-        while (!valid) {
-            this.name = readline.question("> ");
-            for (let key in this.players) {
-                if (key == this.name) {
-                    this.score = this.players[key];
-                    valid = true;
-                }
-            }
-        }
-        console.log(this.score + " " + this.name);
-    }
-
     selectName() {
         let choice = "";
         console.log("Are you a new or returning player?");
@@ -53,6 +22,37 @@ class Player {
             this.createPlayer();
         else
             this.getPlayer();
+    }
+
+    readPlayers() {
+        let input = require('fs').readFileSync('users.txt', 'utf-8').split('\n').filter(Boolean);
+        this.players = {};
+        let name, score, wins, losses;
+        for (let line of input) {
+            [name, score, wins, losses] = line.split(" ");
+            this.players[name] = [parseFloat(score), parseInt(wins), parseInt(losses)];
+        }
+    }
+    createPlayer() {
+        console.log("Choose a username (Don't use any spaces).");
+        this.name = readline.question("> ");
+        this.score = this.wins = this.losses = 0;
+        fs.appendFileSync("users.txt", `${this.name} ${this.score} ${this.wins} ${this.losses} \n`);
+    }
+
+    getPlayer() {
+        let valid = false;
+        console.log("What is your username?");
+        while (!valid) {
+            this.name = readline.question("> ");
+            for (let key in this.players) {
+                if (key == this.name) {
+                    [this.score, this.wins, this.losses] = this.players[key];
+                    valid = true;
+                }
+            }
+        }
+        console.log(this.score + " " + this.wins + " " + this.losses + " " + this.name);
     }
 
 }
