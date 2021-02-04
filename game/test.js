@@ -25,10 +25,11 @@ class Player {
     }
 
     readPlayers() {
-        let input = require('fs').readFileSync('users.txt', 'utf-8').split('\n').filter(Boolean);
+        // I got the following line of code from https://stackoverflow.com/questions/34223065/read-lines-synchronously-from-file-in-node-js
+        this.input = require('fs').readFileSync('users.txt', 'utf-8').split('\n').filter(Boolean);
         this.players = {};
         let name, score, wins, losses;
-        for (let line of input) {
+        for (let line of this.input) {
             [name, score, wins, losses] = line.split(" ");
             this.players[name] = [parseFloat(score), parseInt(wins), parseInt(losses)];
         }
@@ -55,8 +56,21 @@ class Player {
         console.log(this.score + " " + this.wins + " " + this.losses + " " + this.name);
     }
 
+    updatePlayers() {
+        this.wins = 3;
+        this.losses = -2;
+        let name, score, wins, losses;
+        fs.truncateSync("users.txt");
+        for (let line of this.input) {
+            [name, score, wins, losses] = line.split(" ");
+            if (name != this.name)
+                fs.appendFileSync("users.txt", `${name} ${score} ${wins} ${losses} \n`);
+        }
+        fs.appendFileSync("users.txt", `${this.name} ${this.score} ${this.wins} ${this.losses} \n`);
+    }
 }
 
 
 p = new Player();
 p.getPlayer();
+p.updatePlayers();
