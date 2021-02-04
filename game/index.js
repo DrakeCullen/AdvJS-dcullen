@@ -20,6 +20,6 @@ while(playing) {
 
 
     Bugs:
-    * Does clearing zeros always always work?
+    * Make sure that the row and column are in range
 
 */

@@ -19,6 +19,7 @@ class Square {
     
     makeVisible() {
         this.visible = true;
+        this.flag = false;
     }
 
     makeFlag() {
