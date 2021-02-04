@@ -1,5 +1,5 @@
 const Square = require('./square.js')
-const chalk = require('chalk');
+var colors = require('colors');
 
 
 class Board {
@@ -83,18 +83,14 @@ class Board {
             for (let j = 0; j < this.columns; j++) {
                 if (j < 9) {
                     if (this.boardArray[i][j].isFlag())
-                        process.stdout.write(chalk.red(
-                            `${this.boardArray[i][j].printSquare()}    `));
+                        process.stdout.write(`${this.boardArray[i][j].printSquare().red}    `);
                     else
-                        process.stdout.write(
-                            `${this.boardArray[i][j].printSquare()}    `);
+                        process.stdout.write(`${this.boardArray[i][j].printSquare()}    `);
                 } else {
                     if (this.boardArray[i][j].isFlag())
-                        process.stdout.write(chalk.red(
-                            `${this.boardArray[i][j].printSquare()}     `));
+                        process.stdout.write(`${this.boardArray[i][j].printSquare().red}     `);
                     else
-                        process.stdout.write(
-                            `${this.boardArray[i][j].printSquare()}     `);
+                        process.stdout.write(`${this.boardArray[i][j].printSquare()}     `);
                 }
             }
             console.log();
