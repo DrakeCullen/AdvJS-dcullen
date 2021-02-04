@@ -13,7 +13,7 @@ class UI {
 
     getDifficulty() {
         let diff = "";
-        while(diff != "easy" && diff != "medium" && diff != "hard") {
+        while (diff != "easy" && diff != "medium" && diff != "hard") {
             diff = readline.question("Choose a difficulty: easy, medium, or hard:       ");
         }
         console.clear();
@@ -24,14 +24,20 @@ class UI {
 
     chooseFlag() {
         let action = "N/A";
-        while (action != "flag" && action != "")
-            action = readline.question("Would you like to flag a box or guess? Type 'flag' or press enter to guess:    ");
-        if (action == "flag") return true;
+        while (action != '1' && action != '2') {
+            console.log("Do you want to flag a square or reveal its value?");
+            console.log("[1] Flag an element")
+            console.log("[2] Reveal a boxes value")
+            action = readline.question("> ");
+        }
+
+        if (action == '1') return true;
         return false;
     }
 
     chooseCoords() {
-        let x = NaN, y = NaN;
+        let x = NaN,
+            y = NaN;
         // The following to while loops used help from https://stackoverflow.com/questions/19048507/how-to-check-for-datatype-in-node-js-specifically-for-integer
         while (isNaN(x))
             x = parseInt(readline.question("Enter a row:    "));
@@ -51,7 +57,7 @@ class UI {
     isWinner() {
         return this.b.getBombs() == this.b.getFlaggedBombs();
     }
-    
+
 }
 
 module.exports = UI;
