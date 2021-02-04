@@ -20,6 +20,6 @@ while (playing) {
 
 
     Bugs:
-    * Make sure that the row and column are in range
+    
 
 */
