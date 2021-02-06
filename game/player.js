@@ -13,7 +13,7 @@ class Player {
     }
 
     lose() {
-        //console.clear();
+        console.clear();
         [this.remainBombs, this.flaggedBombs] = this.u.getStats();
         console.log(`Try again! You correctly flagged ${this.flaggedBombs} bombs and needed to flag ${this.remainBombs} more bombs! Your total score would have been ${this.newScore}`);
         this.losses++;
@@ -22,7 +22,7 @@ class Player {
     }
 
     winner() {
-        //console.clear();
+        console.clear();
         if (this.newScore > this.score) {
             this.score = this.newScore;
             console.log(`You won and got a new high score! Your score is ${this.score}. Lets see if you made it on the leaderboard!`);
@@ -40,8 +40,10 @@ class Player {
     calcScore() {
         let end = new Date();
         let time = (end - this.start) / 100;
-        console.log(time)
-        this.newScore = 4000 + ((pareseInt(this.flaggedBombs) + 1) * 200) - time;
+        let diff = this.u.currentDiff();
+        this.newScore = 4000 - time;
+        if (diff == 8) this.newScore += 2000;
+        if (diff == 12) this.newScore += 3500;
         if (this.newScore < 0)
             this.newScore = 0;
     }

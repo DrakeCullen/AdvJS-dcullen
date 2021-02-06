@@ -69,6 +69,10 @@ class UI {
         return this.b.getBombs() == this.b.getFlaggedBombs();
     }
 
+    currentDiff() {
+        return this.diff;
+    }
+
 }
 
 module.exports = UI;
