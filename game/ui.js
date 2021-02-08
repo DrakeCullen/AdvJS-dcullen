@@ -4,8 +4,7 @@ const readline = require('readline-sync');
 class UI {
     constructor() {
         this.diff = this.getDifficulty();
-        let b = new Board(this.diff, this.diff);
-        this.b = b;
+        this.b = new Board(this.diff, this.diff);
         //Delete These!
         this.b.printBoard();
         this.b.makeAllVisible();
@@ -26,9 +25,7 @@ class UI {
         return 12;
     }
 
-    getStats() {
-        return [this.b.getBombs(), this.b.getFlaggedBombs()];
-    }
+    getStats() { return [this.b.getBombs(), this.b.getFlaggedBombs()]; }
 
     chooseFlag() {
         let action = "N/A";
@@ -47,11 +44,11 @@ class UI {
         let x = -1;
         let y = -1;
         while (x >= this.b.getRows() || x < 0) {
-            console.log("Enter a row: ")
+            console.log("Enter a row: ");
             x = parseInt(readline.question("> "));
         }
         while (y >= this.b.getColumns() || y < 0) {
-            console.log("Enter a column: ")
+            console.log("Enter a column: ");
             y = parseInt(readline.question("> "));
         }
         return [x, y];
@@ -65,14 +62,9 @@ class UI {
         return this.b.checkPos(x, y, action);
     }
 
-    isWinner() {
-        return this.b.getBombs() == this.b.getFlaggedBombs();
-    }
+    isWinner() { return this.b.getBombs() == this.b.getFlaggedBombs(); }
 
-    currentDiff() {
-        return this.diff;
-    }
-
+    currentDiff() { return this.diff; }
 }
 
 module.exports = UI;

@@ -1,7 +1,6 @@
 const Square = require('./square.js')
 var colors = require('colors');
 
-
 class Board {
     constructor(rows = 12, columns = 12) {
         this.rows = rows;
@@ -12,24 +11,21 @@ class Board {
         this.countNearBombs();
     }
 
-    getBombs() {
-        return this.bombs;
-    }
+    getBombs() { return this.bombs; }
 
-    getFlaggedBombs() {
-        return this.flaggedBombs;
-    }
+    getFlaggedBombs() { return this.flaggedBombs; }
 
-    getRows() {
-        return this.rows;
-    }
+    getRows() { return this.rows; }
 
-    getColumns() {
-        return this.columns;
-    }
+    getColumns() { return this.columns; }
 
-    isValidPos(x, y) {
-        return x >= 0 && x < this.columns && y >= 0 && y < this.rows;
+    isValidPos(x, y) { return x >= 0 && x < this.columns && y >= 0 && y < this.rows; }
+
+    flagBomb(x, y, flag) {
+        if (this.boardArray[x][y].isFlag())
+            this.flaggedBombs++;
+        else
+            this.flaggedBombs--;
     }
 
     createBombs() {
@@ -64,6 +60,33 @@ class Board {
                 }
             }
         }
+    }
+
+    clearSorroundingZeros(x, y, dx, dy) {
+        this.boardArray[x][y].makeVisible();
+        for (let dir = 0; dir < 4; dir++) {
+            if (this.isValidPos(x + dx[dir], y + dy[dir])) {
+                if (this.boardArray[x + dx[dir]][y + dy[dir]].getValue() == 0 && this.boardArray[x + dx[dir]][y + dy[dir]].isVisible() == false) {
+                    this.clearSorroundingZeros(x + dx[dir], y + dy[dir], dx, dy);
+                }
+            }
+        }
+        return;
+    }
+
+    checkPos(x, y, flag = false) {
+        const dx = new Array(-1, 0, 0, 1, -1, -1, 1, -1);
+        const dy = new Array(0, 1, -1, 0, 1, -1, 1, -1);
+        if (flag) {
+            this.boardArray[x][y].makeFlag();
+            if (this.boardArray[x][y].getValue() == -1)
+                this.flagBomb(x, y, flag);
+        } else {
+            if (this.boardArray[x][y].getValue() == -1) return false;
+            else if (this.boardArray[x][y].getValue() == 0) this.clearSorroundingZeros(x, y, dx, dy);
+            else this.boardArray[x][y].makeVisible();
+        }
+        return true;
     }
 
     printSep(len, sep = '', count = true) {
@@ -105,39 +128,6 @@ class Board {
         }
     }
 
-    flagBomb(x, y, flag) {
-        if (this.boardArray[x][y].isFlag())
-            this.flaggedBombs++;
-        else
-            this.flaggedBombs--;
-    }
-
-    clearSorroundingZeros(x, y, dx, dy) {
-        this.boardArray[x][y].makeVisible();
-        for (let dir = 0; dir < 4; dir++) {
-            if (this.isValidPos(x + dx[dir], y + dy[dir])) {
-                if (this.boardArray[x + dx[dir]][y + dy[dir]].getValue() == 0 && this.boardArray[x + dx[dir]][y + dy[dir]].isVisible() == false) {
-                    this.clearSorroundingZeros(x + dx[dir], y + dy[dir], dx, dy);
-                }
-            }
-        }
-        return;
-    }
-
-    checkPos(x, y, flag = false) {
-        const dx = new Array(-1, 0, 0, 1, -1, -1, 1, -1);
-        const dy = new Array(0, 1, -1, 0, 1, -1, 1, -1);
-        if (flag) {
-            this.boardArray[x][y].makeFlag();
-            if (this.boardArray[x][y].getValue() == -1)
-                this.flagBomb(x, y, flag);
-        } else {
-            if (this.boardArray[x][y].getValue() == -1) return false;
-            else if (this.boardArray[x][y].getValue() == 0) this.clearSorroundingZeros(x, y, dx, dy);
-            else this.boardArray[x][y].makeVisible();
-        }
-        return true;
-    }
 
     // For testing purposes
     makeAllVisible() {

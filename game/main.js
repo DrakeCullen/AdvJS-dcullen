@@ -13,13 +13,7 @@ while (playing) {
 
 /*
     What to add:
-    * Create some sort of time function in player
-        - This will be used for score
-    * Make it so that the player can read and write to file
-        - Maybe keep track of top 5 scores for each difficulty?
-
-
     Bugs:
-    
+        If you flag a visible item, it make the value undefined
 
 */

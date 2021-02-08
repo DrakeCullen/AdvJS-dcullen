@@ -5,30 +5,20 @@ class Square {
         this.flag = false;
     }
 
-    setValue(value) {
-        this.value = value;
-    }
+    isVisible() { return this.visible; }
 
-    getValue() {
-        return this.value;
-    }
+    isFlag() { return this.flag; }
 
-    isVisible() {
-        return this.visible;
-    }
+    getValue() { return this.value; }
     
     makeVisible() {
         this.visible = true;
         this.flag = false;
     }
 
-    makeFlag() {
-        this.flag = !this.flag;
-    }
+    setValue(value) { this.value = value; }
 
-    isFlag() {
-        return this.flag;
-    }
+    makeFlag() { this.flag = !this.flag; }
 
     printSquare() {
         if (this.visible) {
