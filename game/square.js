@@ -1,6 +1,6 @@
 class Square {
     constructor() {
-        this.visible = true;
+        this.visible = false;
         this.value = 0;
         this.flag = false;
     }
@@ -28,11 +28,6 @@ class Square {
         } else if(this.flag)
             return '*';
         return '?';
-    }
-
-    //For testing
-    makeInvisible() {
-        this.visible = false;
     }
 }
 

@@ -127,16 +127,6 @@ class Board {
             console.log();
         }
     }
-
-
-    // For testing purposes
-    makeAllVisible() {
-        for (let i = 0; i < this.rows; i++) {
-            for (let j = 0; j < this.columns; j++) {
-                this.boardArray[i][j].makeInvisible();
-            }
-        }
-    }
 }
 
 module.exports = Board;

@@ -5,9 +5,6 @@ class UI {
     constructor() {
         this.diff = this.getDifficulty();
         this.b = new Board(this.diff, this.diff);
-        //Delete These!
-        this.b.printBoard();
-        this.b.makeAllVisible();
     }
 
     getDifficulty() {
@@ -58,7 +55,7 @@ class UI {
         this.b.printBoard();
         let action = this.chooseFlag();
         let [x, y] = this.chooseCoords();
-        //console.clear();
+        console.clear();
         return this.b.checkPos(x, y, action);
     }
 
