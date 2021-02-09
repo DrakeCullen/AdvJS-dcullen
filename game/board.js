@@ -82,6 +82,7 @@ class Board {
             if (this.boardArray[x][y].getValue() == -1)
                 this.flagBomb(x, y, flag);
         } else {
+            if (this.boardArray[x][y].isFlag()) this.boardArray[x][y].makeFlag();
             if (this.boardArray[x][y].getValue() == -1) return false;
             else if (this.boardArray[x][y].getValue() == 0) this.clearSorroundingZeros(x, y, dx, dy);
             else this.boardArray[x][y].makeVisible();

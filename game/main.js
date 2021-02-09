@@ -15,6 +15,5 @@ if (require.main == module) {
 /*
     What to add:
     Bugs:
-        If you flag a visible item, it make the value undefined
 
 */
