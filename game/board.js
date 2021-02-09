@@ -100,7 +100,6 @@ class Board {
             for (let i = 0; i < len; i++)
                 out += i + "    ";
         }
-
         console.log(out);
     }
 

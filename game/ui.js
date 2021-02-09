@@ -2,13 +2,13 @@ const Board = require("./board.js")
 const readline = require('readline-sync');
 
 class UI {
-    constructor() {
-        this.diff = this.getDifficulty();
+    constructor(difficulty = "") {
+        this.diff = this.getDifficulty(difficulty);
         this.b = new Board(this.diff, this.diff);
     }
 
-    getDifficulty() {
-        let diff = "";
+    getDifficulty(difficulty = "") {
+        let diff = difficulty;
         console.log("Choose a difficulty:");
         while (diff != "1" && diff != "2" && diff != "3") {
             console.log("[1] Easy");
@@ -24,8 +24,8 @@ class UI {
 
     getStats() { return [this.b.getBombs(), this.b.getFlaggedBombs()]; }
 
-    chooseFlag() {
-        let action = "N/A";
+    chooseFlag(choice = "") {
+        let action = choice;
         while (action != '1' && action != '2') {
             console.log("Do you want to flag a square or reveal its value?");
             console.log("[1] Flag an element");
