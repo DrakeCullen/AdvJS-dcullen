@@ -8,7 +8,12 @@ function test() {
     assert.strictEqual(square.getValue(), 0);
     square.makeFlag();
     assert.strictEqual(square.isFlag(), true);
-    
+    square.makeVisible();
+    assert.strictEqual(square.isVisible(), true);
+    assert.strictEqual(square.isFlag(), false);
+    square.setValue(-1);
+    assert.strictEqual(square.getValue(), -1);
+    assert.strictEqual(square.printSquare(), 'X');
 
 }
 
