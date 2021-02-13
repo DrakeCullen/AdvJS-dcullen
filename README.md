@@ -19,7 +19,7 @@
 | Name                | Game Project                                            | 
 | Description         | My take on a CLI Minesweeper game.                                                           |
 | Due Date            | 22-Feb-21                                                          |
-| Status              | In-Progress                                        |
+| Status              | Completed                                        |
 | Location            | https://github.com/DrakeCullen/AdvJS-dcullen/tree/main/game                                                               |
-| Self Grade              | -                                        |
-| Notes                 | Core game elements are complete. Need to keep track of scores and write them to a text file.
+| Self Grade              | 100                                        |
+| Notes                 | All requirements were met, extra features were added, and all unit tests passed!
