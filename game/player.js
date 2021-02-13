@@ -87,7 +87,7 @@ class Player {
             this.getLeaders();
             this.printLeaderboard();
         } else {
-            console.log("You won but did not get a new score.")
+            console.log("You won but did not get a new high score.")
         }
         this.wins++;
         console.log(`${this.name}, here are you updated stats. You currently have ${this.wins} wins, ${this.losses} losses, and a high score of ${this.score}!`);
