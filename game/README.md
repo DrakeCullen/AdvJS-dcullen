@@ -1,6 +1,6 @@
 # Project 1 - Game Project
 
-## I created Minesweeper in the terminal using NodeJS.
+## I created [Minesweeper](https://github.com/DrakeCullen/AdvJS-dcullen/tree/main/game/imgs) in the terminal using NodeJS.
 ### My game satisfies all of the requirements and adds "bells and whistles" such as changing the color of a flaged element. The game keeps track of user's and their stats.
 <br/>
 
@@ -13,7 +13,12 @@
 
 <br/>
 
-### Learn more about the game and see it working by clicking [here](https://github.com/DrakeCullen/AdvJS-dcullen/tree/main/game/imgs)!
+### All my unit tests passed!
+![alt text](imgs/unit_test.png)
+
+<br/>
+
+### Learn more about the game and see it working by clicking<b> [here](https://github.com/DrakeCullen/AdvJS-dcullen/tree/main/game/imgs)!</b>
 
 <br/>
 
