@@ -6,7 +6,7 @@
 <br/>
 <br/>
 
-### Here are what the difficulties look like. Easy - 6 X 6, Medium 8 X 8, Hard 12 X 12: 
+### Here are what the difficulties look like. Easy - 6 X 6, Medium - 8 X 8, Hard - 12 X 12: 
 ![alt text](easy.png)
 <br/>
 ![alt text](medium.png)
