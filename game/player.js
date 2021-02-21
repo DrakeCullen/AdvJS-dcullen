@@ -24,7 +24,7 @@ class Player {
 
     readPlayers() {
         // I got the following line of code from https://stackoverflow.com/questions/34223065/read-lines-synchronously-from-file-in-node-js
-        this.input = require('fs').readFileSync('gameStats/users.txt', 'utf-8').split('\n').filter(Boolean);
+        this.input = fs.readFileSync('gameStats/users.txt', 'utf-8').split('\n').filter(Boolean);
         this.players = {};
         let name, score, wins, losses;
         for (let line of this.input) {
