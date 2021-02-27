@@ -1,6 +1,6 @@
 # Project 2 - Kattis Problems
 
-### Both problems have a difficulty higher than 1.7. Furthermore, each problem has at least 3 automated test cases. All the criteria is met, so I believe that I earn a score of 100%.
+### Both problems have a difficulty higher than 1.7. Furthermore, each problem has at least 3 automated test cases. All the criteria is met, so I believe that I earn a score of 100%. Here are the links to the problems on Open Kattis: [Lektira](https://open.kattis.com/problems/lektira) and [Texture Analysis](https://open.kattis.com/problems/textureanalysis)
 
 <br/>
 
