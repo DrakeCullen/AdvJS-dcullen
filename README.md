@@ -23,3 +23,16 @@
 | Location            | https://github.com/DrakeCullen/AdvJS-dcullen/tree/main/game                                                               |
 | Self Grade              | 100                                        |
 | Notes                 | All requirements were met, extra features were added, and all unit tests passed!
+
+
+## Project 2
+
+| Name                | Value                                                                 |
+| -------------       | -------------                                                         |
+| Name                | Kattis Problems                                           | 
+| Description         | Complete two Kattis problem with difficulty of 1.7 or higher.                                                           |
+| Due Date            | 15-Mar-21                                                          |
+| Status              | Completed                                        |
+| Location            | https://github.com/DrakeCullen/AdvJS-dcullen/tree/main/kattis                                                               |
+| Self Grade              | 100                                        |
+| Notes                 | All requirements were met. I choose problems with difficulties 2.7 and 3.0.
