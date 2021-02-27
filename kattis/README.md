@@ -8,9 +8,9 @@
 <br/>
 
 
-![alt text](/lektira/imgs/test_cases_passed.png)
+![alt text](lektira/imgs/test_cases_passed.png)
 
-![alt text](/lektira/imgs/kattis_accepted.png)
+![alt text](lektira/imgs/kattis_accepted.png)
 
 <br/>
 
@@ -18,6 +18,6 @@
 <br/>
 
 
-![alt text](/textureanalysis/imgs/test_cases_passed.png)
+![alt text](textureanalysis/imgs/test_cases_passed.png)
 
-![alt text](/textureanalysis/imgs/kattis_accepted.png)
+![alt text](textureanalysis/imgs/kattis_accepted.png)
