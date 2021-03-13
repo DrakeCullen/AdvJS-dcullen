@@ -1,0 +1,14 @@
+.game-area {
+  background-image: url(./imgs/background.gif);
+  background-size: cover;
+ background-repeat: no-repeat;
+  border: 2px solid #000;
+}
+
+.golf-ball {
+  height: 25px;
+  width: 25px;
+  background-color: #bbb;
+  border-radius: 50%;
+  position: 'absolute';
+}
