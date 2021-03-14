@@ -7,9 +7,8 @@ class LiveGame extends React.Component {
     constructor(props) {
         super(props);
         this.clouds = []
-        this.state = { x: Constants.X_START, y: Constants.Y_START};
-        this.gravity = this.gravity.bind(this);
-        this.mousePos = this.mousePos.bind(this);
+        this.state = { x: Constants.X_START, y: Constants.Y_START, gravity: Constants.GRAVITY};
+        this.gravityUpdate = this.gravityUpdate.bind(this);
         this.initialize();
     }
 
@@ -22,16 +21,16 @@ class LiveGame extends React.Component {
         );
     }
 
-    mousePos(e) {
-        console.log(e.screenX)
-    }
     componentDidMount() {
-        setInterval(this.gravity);
+        setInterval(this.gravityUpdate, 5);
         document.onkeydown = this.onKeyDown;
+        
     }
 
     componentDidUpdate() {
+       
     }
+
     onKeyDown = (e) => {
         if (e.keyCode == '38') {
             this.setState((state, props) => ({y: state.y + 20}));
@@ -47,13 +46,10 @@ class LiveGame extends React.Component {
         }
     }
 
-    gravity(e) {
-        this.setState((state, props) => ({y: state.y - .5}));
-    }
 
     initialize() {
-        let yRand= Constants.HEIGHT - 170 - Math.floor(Math.random() * 30); 
-        let xRand=0;
+        let yRand = Constants.HEIGHT - 170 - Math.floor(Math.random() * 30); 
+        let xRand = 0;
         let xMin = Math.ceil(window.innerWidth / 2 - Constants.WIDTH / 2);
         let xMax = Math.floor(window.innerWidth / 2 + Constants.WIDTH / 2 - Constants.CLOUD_WIDTH);
         for(let i = 0; i < 8; i++) {
@@ -64,6 +60,18 @@ class LiveGame extends React.Component {
         for (let c of this.clouds) {
             console.log(c)
         }
+    }
+
+    gravityUpdate(e) {
+        this.setState((state, props) => ({y: state.y - state.gravity}));
+        if (this.state.y + Constants.BALL_RADIUS <= Constants.HEIGHT - 200)
+            this.setState((state, props) => ({gravity: 0}));
+        console.log(this.state.y)
+    }
+
+    gameOver() {
+        if (this.state.y + Constants.BALL_RADIUS <= 600)//Constants.HEIGHT + 100)
+            this.setState((state, props) => ({y: 0}));
     }
 
 }
