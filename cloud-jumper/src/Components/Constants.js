@@ -4,4 +4,4 @@ export const BALL_RADIUS = 20;
 export const CLOUD_WIDTH = 80;
 export const CLOUD_HEIGHT = 20;
 export const X_START = window.innerWidth / 2;
-export const Y_START = HEIGHT ;
+export const Y_START = HEIGHT + 200;
