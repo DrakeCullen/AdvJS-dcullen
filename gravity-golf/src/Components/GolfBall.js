@@ -6,7 +6,7 @@ class GolfBall extends React.Component {
     constructor(props) {
         super(props);
         this.state = { x: props.x, y: props.y};
-        this.jump = this.jump.bind(this);
+        this.gravity = this.gravity.bind(this);
     }
 
     render() {
@@ -19,18 +19,23 @@ class GolfBall extends React.Component {
                 height: Constants.BALL_RADIUS,
                 left: this.state.x,
                 bottom: this.state.y,
-            }} tabIndex="0" onKeyDown={(e) => this.jump(e)}>
+            }}>
                 
             </div>
             
         );
     }
 
-    jump(e) {
-        console.log("MO")
-        console.log(e.keyCode)
+    componentDidMount() {
+        setInterval(this.gravity);
+        document.onkeydown = this.onKeyDown;
+    }
+
+    componentDidUpdate() {
+        console.log("Player");
+    }
+    onKeyDown = (e) => {
         if (e.keyCode == '38') {
-            console.log("ya")
             this.setState((state, props) => ({y: state.y + 50}));
         }
         else if (e.keyCode == '40') {
@@ -42,6 +47,10 @@ class GolfBall extends React.Component {
         else if (e.keyCode == '39') {
             this.setState((state, props) => ({x: state.x + 50}));
         }
+    }
+
+    gravity(e) {
+        this.setState((state, props) => ({y: state.y - .5}));
     }
 }
 
