@@ -8,11 +8,11 @@ class HomeScreen extends React.Component {
 
     render() {
         return (
-            <div className="game-area container" style={{width: Constants.WIDTH, height: Constants.HEIGHT}}>
-            <div className="text-center">
-                <button type="button" className="btn btn-primary" onClick={this.props.startGame}>Play</button>
+            <div className="game-area" style={{ width: Constants.WIDTH, height: Constants.HEIGHT }}>
+                <div className="text-center">
+                    <button type="button" className="btn btn-primary" onClick={this.props.startGame}>Play</button>
+                </div>
             </div>
-         </div>
         );
     }
 }

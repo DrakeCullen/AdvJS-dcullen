@@ -12,10 +12,10 @@ class Cloud extends React.Component {
                 position: 'absolute',
                 backgroundColor: '#C1BEBA',
                 borderRadius: '25px',
-                width: Constants.CLOUD_WIDTH,
+                width: `${Constants.CLOUD_WIDTH}px`,
                 height: Constants.CLOUD_HEIGHT,
-                left: data[0].left,
-                bottom: data[1].right
+                left: `${data[0].left}px`,
+                bottom: `${data[1].right}px`
             }}></div>);
 
             return (

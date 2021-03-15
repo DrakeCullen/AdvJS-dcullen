@@ -15,10 +15,10 @@ class Player extends React.Component {
                 position: 'absolute',
                 backgroundColor: 'white',
                 borderRadius: '25px',
-                width: Constants.BALL_RADIUS,
-                height: Constants.BALL_RADIUS,
-                left: this.props.x,
-                bottom: this.props.y
+                width: `${Constants.BALL_RADIUS}px`,
+                height: `${Constants.BALL_RADIUS}px`,
+                left: `${this.props.x}px`,
+                bottom: `${this.props.y}px`
             }}>
                 
             </div>

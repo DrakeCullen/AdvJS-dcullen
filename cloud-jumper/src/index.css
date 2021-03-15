@@ -1,8 +1,11 @@
 .game-area {
+  position: 'absolute';
   background-image: url(./imgs/background.gif);
   background-size: cover;
- background-repeat: no-repeat;
+  background-repeat: no-repeat;
   border: 2px solid #000;
+  float: none;
+  margin: 0 auto;
 }
 
 .golf-ball {
