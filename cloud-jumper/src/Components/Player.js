@@ -15,6 +15,7 @@ class Player extends React.Component {
                 position: 'absolute',
                 backgroundColor: 'white',
                 borderRadius: '25px',
+                border: '2px solid black',
                 width: `${Constants.BALL_RADIUS}px`,
                 height: `${Constants.BALL_RADIUS}px`,
                 left: `${this.props.x}px`,
