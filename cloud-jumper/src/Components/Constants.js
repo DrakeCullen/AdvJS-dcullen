@@ -12,3 +12,4 @@ export const X_START = window.innerWidth/2;
 export const Y_START = BOTTOM + HEIGHT - PLAYER_HEIGHT;
 export const GRAVITY = 1.9;
 export const COUNTER = 70;
+export const COIN_RADIUS = 15;

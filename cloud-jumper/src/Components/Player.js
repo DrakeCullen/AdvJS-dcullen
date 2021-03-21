@@ -17,7 +17,7 @@ class Player extends React.Component {
                     left: `${this.props.x}px`,
                     bottom: `${this.props.y}px`
                 }}>
-                    <img class="player" src={window.location.origin + '/bunny-left.png'}></img>
+                    <img className="player" src={window.location.origin + '/bunny-left.png'}></img>
                 </div>
             );
         }
@@ -30,7 +30,7 @@ class Player extends React.Component {
                     left: `${this.props.x}px`,
                     bottom: `${this.props.y}px`
                 }}>
-                    <img class="player" src={window.location.origin + '/bunny-right.png'}></img>
+                    <img className="player" src={window.location.origin + '/bunny-right.png'}></img>
                 </div>
             );
         }

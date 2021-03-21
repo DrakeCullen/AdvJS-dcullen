@@ -19,3 +19,9 @@
   height: 30px;
   background-size: cover;
 }
+
+.coin {
+  width: 15px;
+  height: 15px;
+  background-size: cover;
+}

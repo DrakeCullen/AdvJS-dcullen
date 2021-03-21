@@ -9,14 +9,14 @@ class Cloud extends React.Component {
     }
 
     render() {
-        const cloudDivs = this.props.clouds.map((data) => <div key={data[0].left + data[1].right} style={{
+        const cloudDivs = this.props.clouds.map((data) => <div key={data[0].left + data[1].right / data[0].left * data[1].right} style={{
             position: 'absolute',
             width: `${Constants.CLOUD_WIDTH}px`,
             height: `${Constants.CLOUD_HEIGHT}px`,
             left: `${data[0].left}px`,
             bottom: `${data[1].right}px`,
 
-        }}><img class="cloud" src={window.location.origin + '/cloudImage.png'}></img></div>);
+        }}><img className="cloud" src={window.location.origin + '/cloudImage.png'}></img></div>);
 
         return (
             cloudDivs
