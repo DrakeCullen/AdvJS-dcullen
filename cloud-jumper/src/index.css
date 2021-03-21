@@ -8,10 +8,8 @@
   margin: 0 auto;
 }
 
-.golf-ball {
-  height: 25px;
-  width: 25px;
-  background-image: '/imgs/bunny-left.jpeg';
-  border-radius: 50%;
-  position: 'absolute';
+.cloud {
+  width: 80px;
+  height: 50px;
+  background-size: cover;
 }

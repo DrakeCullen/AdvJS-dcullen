@@ -22,7 +22,7 @@ class LiveGame extends React.Component {
         );
     }
     componentDidMount() {
-        setInterval(this.gravityUpdate, 5);
+        setInterval(this.gravityUpdate, 10);
         document.onkeydown = this.onKeyDown;
 
     }
@@ -32,8 +32,6 @@ class LiveGame extends React.Component {
             this.setState((state, props) => ({ x: state.x - 10 }));
         else if (e.keyCode == '39' && this.state.x < Constants.RIGHT - Constants.BALL_RADIUS) 
             this.setState((state, props) => ({ x: state.x + 10 }));
-        else if (e.keyCode == '32')
-            this.cloudCollision();
     }
 
     initialize() {
@@ -41,7 +39,7 @@ class LiveGame extends React.Component {
         this.xMax = Math.floor(window.innerWidth / 2 + Constants.WIDTH / 2 - Constants.CLOUD_WIDTH);
         this.yMin = Constants.TOP - Constants.CLOUD_HEIGHT;
         this.yMax = Constants.BOTTOM + Constants.CLOUD_HEIGHT;
-        for (let i = 0; i < 10; i++) {
+        for (let i = 0; i < 7; i++) {
             let xRand = Math.floor(Math.random() * (this.xMax - this.xMin) + this.xMin);
             let yRand = Math.floor(Math.random() * (this.yMax - this.yMin) + this.yMin);
             this.clouds.push([{ 'left': xRand }, { 'right': yRand }]);
@@ -62,20 +60,24 @@ class LiveGame extends React.Component {
             this.cloudCollision();
         }
         else {
-            if (this.counter == 150) 
+            if (this.counter == Constants.COUNTER) 
                 this.setState((state, props) => ({ gravity: state.gravity*-1 }));
             else if (this.counter == 1)
                 this.setState((state, props) => ({ gravity: Constants.GRAVITY }));
-            this.setState((state, props) => ({ y: state.y - state.gravity*2 }));
-            for (let cloud of this.clouds) { 
-                cloud[1].right--;
-                if(cloud[1].right < Constants.BOTTOM)
-                    cloud[1].right = window.innerHeight + Constants.CLOUD_HEIGHT;  
-            }
+            this.moveClouds();
+            this.setState((state, props) => ({ y: state.y - state.gravity*1.5 }));
             this.counter--;
         }
         this.gameOver();
         this.ceillingCollide();
+    }
+
+    moveClouds() {
+        for (let cloud of this.clouds) { 
+            cloud[1].right-=2;
+            if(cloud[1].right <= Constants.BOTTOM)
+                this.updateCloud(cloud);//window.innerHeight + Constants.CLOUD_HEIGHT;  
+        }
     }
 
     gameOver() {
@@ -92,7 +94,7 @@ class LiveGame extends React.Component {
     cloudCollision() {
         for (let i = 0; i < this.clouds.length; i++) {
             if (this.state.x >= this.clouds[i][0].left - Constants.BALL_RADIUS && this.state.x <= this.clouds[i][0].left + Constants.CLOUD_WIDTH && this.state.y >= this.clouds[i][1].right - Constants.CLOUD_HEIGHT && this.state.y <= this.clouds[i][1].right + Constants.CLOUD_HEIGHT) {
-                this.counter = 150;
+                this.counter = Constants.COUNTER;
                 this.updateCloud(this.clouds[i]);
                 this.validCloud(this.clouds[i], i);
             }
@@ -107,7 +109,7 @@ class LiveGame extends React.Component {
 
     updateCloud(cloud) {
         cloud[0].left = Math.floor(Math.random() * (this.xMax - this.xMin) + this.xMin);
-        cloud[1].right = Math.floor(Math.random() * (-100 -500) -500);
+        cloud[1].right = window.innerHeight;//Math.floor(Math.random() * (window.innerHeight - 30) +30) * -1;//(-100 -500) -500);
     }
 
     checkAvailable(cloud, i) {

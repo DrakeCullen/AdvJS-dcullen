@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import * as Constants from './Constants.js';
-import LiveGame from './LiveGame.js'
+import LiveGame from './LiveGame.js';
+import CloudImage from './cloudImage.png';
 
 class Cloud extends React.Component {
     constructor(props) {
@@ -10,13 +11,12 @@ class Cloud extends React.Component {
     render() {
             const cloudDivs = this.props.clouds.map((data) => <div key={data[0].left + data[1].right} style={{
                 position: 'absolute',
-                backgroundColor: '#C1BEBA',
-                borderRadius: '25px',
                 width: `${Constants.CLOUD_WIDTH}px`,
-                height: Constants.CLOUD_HEIGHT,
+                height: `${Constants.CLOUD_HEIGHT}px`,
                 left: `${data[0].left}px`,
-                bottom: `${data[1].right}px`
-            }}></div>);
+                bottom: `${data[1].right}px`,
+                
+            }}><img class="cloud" src={window.location.origin + '/cloudImage.png'}></img></div>);
 
             return (
                     cloudDivs
