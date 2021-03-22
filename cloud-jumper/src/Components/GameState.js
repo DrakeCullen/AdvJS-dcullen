@@ -8,6 +8,7 @@ class GameState extends React.Component {
         super(props);
         this.state = { playing: false };
         this.startGame = this.startGame.bind(this);
+        this.gameOver = this.gameOver.bind(this);
     }
 
     render() {
@@ -15,14 +16,17 @@ class GameState extends React.Component {
         if (!playing) {
             return(<HomeScreen startGame={this.startGame}/>);
         } else {
-            return (<LiveGame />);
+            return (<LiveGame restart={this.gameOver}/>);
         }
     }
 
     startGame() {
         this.setState({ playing: true });
-        console.log(this.state.playing)
-      }
+    }
+
+    gameOver() {
+        this.setState((state, props) => ({ playing: false }));
+    }
 }
 
 export default GameState

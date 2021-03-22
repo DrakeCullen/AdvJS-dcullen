@@ -27,9 +27,13 @@ class LiveGame extends React.Component {
         );
     }
     componentDidMount() {
-        setInterval(this.gravityUpdate, 10);
+        this.gameInterval = setInterval(this.gravityUpdate, 10);
         document.onkeydown = this.onKeyDown;
         document.coinCollision = this.coinCollision();
+    }
+
+    componentWillUnmount() {
+        clearInterval(this.gameInterval);
     }
 
     onKeyDown = (e) => {
@@ -113,8 +117,10 @@ class LiveGame extends React.Component {
     }
 
     gameOver() {
-        if (this.state.y <= Constants.BOTTOM)
+        if (this.state.y <= Constants.BOTTOM) {
             this.setState((state, props) => ({ gravity: 0 }));
+            this.props.restart();
+        }
     }
 
     ceillingCollide() {
@@ -136,7 +142,7 @@ class LiveGame extends React.Component {
     coinCollision() {
         for (let i = 0; i < this.coins.length; i++) {
             if (this.state.x >= this.coins[i][0].left - Constants.PLAYER_WIDTH && this.state.x <= this.coins[i][0].left + Constants.COIN_RADIUS && this.state.y >= this.coins[i][1].right - Constants.COIN_RADIUS && this.state.y <= this.coins[i][1].right + Constants.COIN_RADIUS) {
-                this.setState((state, props) => ({ score: 100}));
+                this.setState((state, props) => ({ score: state.score + 10}));
                 console.log(this.state.score);
                 this.updateCoin(this.coins[i]);
                 this.coins[i][1].right = Math.floor(Math.random() * (window.innerHeight - Constants.BOTTOM/2) + Constants.BOTTOM)

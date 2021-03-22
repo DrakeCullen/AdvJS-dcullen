@@ -8,10 +8,7 @@ class Score extends React.Component {
     }
     render() {
         return (
-
-                    <p dangerouslySetInnerHTML={{__html: this.props.score}} />
-               
-        
+            <p dangerouslySetInnerHTML={{ __html: "Score: " + this.props.score }} />
         );
     }
 
