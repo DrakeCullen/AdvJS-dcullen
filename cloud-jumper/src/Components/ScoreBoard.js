@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import * as Constants from './Constants.js';
+import Coin from './Coin.js';
 import scoresJSON from './Data/highScores.json';
 
 class ScoreBoard extends React.Component {
@@ -8,8 +9,6 @@ class ScoreBoard extends React.Component {
     }
 
     render() {
-
-    
         return (
             <div className="game-area text-center" style={{ width: Constants.WIDTH, height: Constants.HEIGHT}}>
                 <h1 className="leader-logo mt-3">Leaderboard:</h1>

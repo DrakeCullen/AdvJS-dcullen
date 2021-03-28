@@ -4,6 +4,8 @@ import Player from './Player.js';
 import Cloud from './Cloud.js';
 import Coin from './Coin.js';
 import Score from './Score.js';
+import HighScoreForm from './HighScoreForm.js'
+//import scoresJSON from './Data/highScores.json';
 
 class LiveGame extends React.Component {
     constructor(props) {
@@ -53,7 +55,7 @@ class LiveGame extends React.Component {
     }
 
     initClouds() {
-        for (let i = 0; i < 8; i++) {
+        for (let i = 0; i < 9; i++) {
             let xRand = Math.floor(Math.random() * (this.xMax - this.xMin) + this.xMin);
             let yRand = Math.floor(Math.random() * (this.yMax - this.yMin) + this.yMin);
             this.clouds.push([{ 'left': xRand }, { 'right': yRand }]);
@@ -111,7 +113,7 @@ class LiveGame extends React.Component {
 
     moveCloudsUp() {
         for (let cloud of this.clouds) { 
-            cloud[1].right+=.6;
+            cloud[1].right+=.7;
            // if(cloud[1].right >= Constants.TOP)
                // this.cloudOffBottom(cloud);;  
         }
@@ -127,7 +129,7 @@ class LiveGame extends React.Component {
 
     moveCoinsUp() {
         for (let coin of this.coins) { 
-            coin[1].right+=.6;
+            coin[1].right+=.7;
             //if(coin[1].right >= Constants.TOP + Constants.COIN_RADIUS)
               //  this.coinRandom(coin);
         }
@@ -136,7 +138,18 @@ class LiveGame extends React.Component {
     gameOver() {
         if (this.state.y <= Constants.BOTTOM) {
             this.setState((state, props) => ({ gravity: 0 }));
-            this.props.restart();
+            if(this.state.score >= this.props.scores[4].score) {
+                console.log("win")
+                this.props.scores[4].score = this.state.score;
+                //alert(this.props.scores[4].score)
+                this.props.newRecord();
+            }
+            else {
+                //alert(this.state.score)
+                //alert(this.props.scores[4].score)
+                console.log("lose")
+                this.props.restart();
+            }
         }
     }
 
