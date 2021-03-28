@@ -10,6 +10,6 @@ export const LEFT = window.innerWidth/2 - WIDTH/2;
 export const RIGHT = window.innerWidth/2 + WIDTH/2;
 export const X_START = window.innerWidth/2;
 export const Y_START = BOTTOM + HEIGHT - PLAYER_HEIGHT;
-export const GRAVITY = 1.7;
+export const GRAVITY = 1.2;
 export const COUNTER = 80;
 export const COIN_RADIUS = 15;

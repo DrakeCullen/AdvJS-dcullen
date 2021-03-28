@@ -113,7 +113,7 @@ class LiveGame extends React.Component {
 
     moveCloudsUp() {
         for (let cloud of this.clouds) { 
-            cloud[1].right+=.7;
+            cloud[1].right+=1.2;
            // if(cloud[1].right >= Constants.TOP)
                // this.cloudOffBottom(cloud);;  
         }
@@ -129,7 +129,7 @@ class LiveGame extends React.Component {
 
     moveCoinsUp() {
         for (let coin of this.coins) { 
-            coin[1].right+=.7;
+            coin[1].right+=1.2;
             //if(coin[1].right >= Constants.TOP + Constants.COIN_RADIUS)
               //  this.coinRandom(coin);
         }
