@@ -53,7 +53,7 @@ class LiveGame extends React.Component {
     }
 
     initClouds() {
-        for (let i = 0; i < 7; i++) {
+        for (let i = 0; i < 8; i++) {
             let xRand = Math.floor(Math.random() * (this.xMax - this.xMin) + this.xMin);
             let yRand = Math.floor(Math.random() * (this.yMax - this.yMin) + this.yMin);
             this.clouds.push([{ 'left': xRand }, { 'right': yRand }]);
@@ -73,10 +73,9 @@ class LiveGame extends React.Component {
             this.coins.push([{ 'left': xRand }, { 'right': yRand }]);
         }
         for (let i = 0; i < this.coins.length; i++) {
-            this.validCloud(this.coins[i], i)
-            this.clouds.left = this.clouds[i][0].left;
-            this.clouds.right = this.clouds[i][1].right;
-            console.log(this.clouds.left, this.clouds.right)
+            this.validCoin(this.coins[i], i)
+            this.coins.left = this.coins[i][0].left;
+            this.coins.right = this.coins[i][1].right;
         }
     }
 
@@ -84,14 +83,16 @@ class LiveGame extends React.Component {
         if(this.counter == 0) {
             this.setState((state, props) => ({ y: state.y - state.gravity }));
             this.cloudCollision();
+            this.moveCloudsUp();
+            this.moveCoinsUp();
         }
         else {
             if (this.counter == Constants.COUNTER) 
                 this.setState((state, props) => ({ gravity: state.gravity*-1 }));
             else if (this.counter == 1)
                 this.setState((state, props) => ({ gravity: Constants.GRAVITY }));
-            this.moveClouds();
-            this.moveCoins();
+            this.moveCloudsDown();
+            this.moveCoinsDown();
             this.setState((state, props) => ({ y: state.y - state.gravity*1.5 }));
             this.counter--;
         }
@@ -100,19 +101,35 @@ class LiveGame extends React.Component {
         this.ceillingCollide();
     }
 
-    moveClouds() {
+    moveCloudsDown() {
         for (let cloud of this.clouds) { 
             cloud[1].right-=2;
             if(cloud[1].right <= Constants.BOTTOM)
-                this.updateCloud(cloud);//window.innerHeight + Constants.CLOUD_HEIGHT;  
+                this.cloudOffBottom(cloud);;  
         }
     }
 
-    moveCoins() {
+    moveCloudsUp() {
+        for (let cloud of this.clouds) { 
+            cloud[1].right+=.6;
+           // if(cloud[1].right >= Constants.TOP)
+               // this.cloudOffBottom(cloud);;  
+        }
+    }
+
+    moveCoinsDown() {
         for (let coin of this.coins) { 
             coin[1].right-=2;
             if(coin[1].right <= Constants.BOTTOM)
                 this.updateCoin(coin);
+        }
+    }
+
+    moveCoinsUp() {
+        for (let coin of this.coins) { 
+            coin[1].right+=.6;
+            //if(coin[1].right >= Constants.TOP + Constants.COIN_RADIUS)
+              //  this.coinRandom(coin);
         }
     }
 
@@ -131,9 +148,9 @@ class LiveGame extends React.Component {
 
     cloudCollision() {
         for (let i = 0; i < this.clouds.length; i++) {
-            if (this.state.x >= this.clouds[i][0].left - Constants.PLAYER_WIDTH && this.state.x <= this.clouds[i][0].left + Constants.CLOUD_WIDTH && this.state.y >= this.clouds[i][1].right - Constants.CLOUD_HEIGHT && this.state.y <= this.clouds[i][1].right + Constants.CLOUD_HEIGHT) {
+            if (this.state.x >= this.clouds[i][0].left - Constants.PLAYER_WIDTH && this.state.x <= this.clouds[i][0].left + Constants.CLOUD_WIDTH && this.state.y >= this.clouds[i][1].right - Constants.CLOUD_HEIGHT && this.state.y <= this.clouds[i][1].right + Constants.CLOUD_HEIGHT && this.clouds[i][1].right + Constants.CLOUD_HEIGHT <= Constants.TOP) {
                 this.counter = Constants.COUNTER;
-                this.updateCloud(this.clouds[i]);
+                this.cloudOffBottom(this.clouds[i]);
                 this.validCloud(this.clouds[i], i);
             }
         }
@@ -143,7 +160,6 @@ class LiveGame extends React.Component {
         for (let i = 0; i < this.coins.length; i++) {
             if (this.state.x >= this.coins[i][0].left - Constants.PLAYER_WIDTH && this.state.x <= this.coins[i][0].left + Constants.COIN_RADIUS && this.state.y >= this.coins[i][1].right - Constants.COIN_RADIUS && this.state.y <= this.coins[i][1].right + Constants.COIN_RADIUS) {
                 this.setState((state, props) => ({ score: state.score + 10}));
-                console.log(this.state.score);
                 this.updateCoin(this.coins[i]);
                 this.coins[i][1].right = Math.floor(Math.random() * (window.innerHeight - Constants.BOTTOM/2) + Constants.BOTTOM)
                 this.validCoin(this.coins[i], i);
@@ -153,7 +169,7 @@ class LiveGame extends React.Component {
 
     validCloud(cloud, i) {
         while(!this.checkAvailable(cloud, i)) {
-            this.updateCloud(cloud)
+            this.cloudOffBottom(cloud)
         }
     }
 
@@ -163,16 +179,29 @@ class LiveGame extends React.Component {
         }
     }
 
-    updateCloud(cloud) {
+    cloudOffBottom(cloud) {
         this.setState((state, props) => ({ cloudMove: state.cloudMove++}));
         cloud[0].left = Math.floor(Math.random() * (this.xMax - this.xMin) + this.xMin);
         cloud[1].right = window.innerHeight;//Math.floor(Math.random() * (window.innerHeight - 30) +30) * -1;//(-100 -500) -500);
+    }
+
+    cloudOffTop(cloud) {
+        this.setState((state, props) => ({ cloudMove: state.cloudMove++}));
+        cloud[0].left = Math.floor(Math.random() * (this.xMax - this.xMin) + this.xMin);
+        cloud[1].right = Constants.BOTTOM - 100;
     }
 
     updateCoin(coin) {
         this.setState((state, props) => ({ cloudMove: state.cloudMove++}));
         coin[0].left = Math.floor(Math.random() * (this.xMax - this.xMin) + this.xMin);
         coin[1].right = window.innerHeight;
+    }
+
+    coinRandom(coin) {
+        this.setState((state, props) => ({ cloudMove: state.cloudMove++}));
+        coin[0].left = Math.floor(Math.random() * (this.xMax - this.xMin) + this.xMin);
+        coin[1].right = Math.floor(Math.random() * (this.yMax - this.yMin) + this.yMin);
+
     }
 
     checkAvailable(cloud, i) {
