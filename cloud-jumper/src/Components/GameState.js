@@ -77,7 +77,9 @@ class GameState extends React.Component {
     handleSubmit = (event) => {
         event.preventDefault()
         this.scores[4].name = event.target[0].value;
-       
+        this.scores.sort((a,b) => {
+            return b.score - a.score
+        });
         this.setState({ newHighScore: false});
     }
 }
