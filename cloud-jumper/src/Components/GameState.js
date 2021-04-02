@@ -5,26 +5,31 @@ import ScoreBoard from './ScoreBoard.js'
 import * as Constants from './Constants.js';
 import HighScoreForm from './HighScoreForm.js'
 import scoresJSON from './Data/highScores.json';
+import Instructions from './Instructions.js';
 
 class GameState extends React.Component {
     constructor(props) {
         super(props);
-        this.state = { playing: false, scoreboard: false, newHighScore: false };
+        this.state = { playing: false, scoreboard: false, newHighScore: false, instructions: false };
         this.scores = scoresJSON;
         this.playerScore = 0;
         this.startGame = this.startGame.bind(this);
         this.homeScreen = this.homeScreen.bind(this);
         this.viewLeaderboard = this.viewLeaderboard.bind(this);
+        this.viewInstructions = this.viewInstructions.bind(this);
         this.gameOver = this.gameOver.bind(this);
         this.highScore = this.highScore.bind(this);
         this.newRecord = this.newRecord.bind(this);
     }
 
     render() {
-        if (!this.state.playing && !this.state.scoreboard && !this.state.newHighScore) {
-            return(<HomeScreen startGame={this.startGame} viewLeaderboard={this.viewLeaderboard}/>);
+        if (!this.state.playing && !this.state.scoreboard && !this.state.newHighScore &&!this.state.instructions) {
+            return(<HomeScreen startGame={this.startGame} viewLeaderboard={this.viewLeaderboard} viewInstructions={this.viewInstructions}/>);
         } else if (this.state.scoreboard) {
             return(<ScoreBoard homeScreen={this.homeScreen} scoresJSON={this.scores}/>);
+        } 
+        else if (this.state.instructions) {
+            return(<Instructions homeScreen={this.homeScreen}/>);
         } 
         else if (!this.state.newHighScore){
             return (<LiveGame restart={this.gameOver} newRecord={this.newRecord} scores={this.scores}/>);
@@ -42,8 +47,12 @@ class GameState extends React.Component {
         this.setState({ scoreboard: true});
     }
 
+    viewInstructions() {
+        this.setState({ instructions: true});
+    }
+
     homeScreen() {
-        this.setState({ playing:false, scoreboard: false, newHighScore: false});
+        this.setState({ playing:false, scoreboard: false, newHighScore: false, instructions: false});
     }
 
     gameOver() {

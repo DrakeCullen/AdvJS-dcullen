@@ -20,7 +20,7 @@ class HomeScreen extends React.Component {
                     <button type="button" className="btn btn-primary bt-md mt-3" onClick={this.props.viewLeaderboard}>View Leaderboard</button>
                 </div>
                 <div>
-                    <button type="button" className="btn btn-info bt-md mt-3" onClick={this.props.viewLeaderboard}>Instructions</button>
+                    <button type="button" className="btn btn-info bt-md mt-3" onClick={this.props.viewInstructions}>Instructions</button>
                 </div>
             </div>
         );

@@ -21,10 +21,10 @@ class LiveGame extends React.Component {
     render() {
         return (
             <div className="game-area" style={{ width: Constants.WIDTH, height: Constants.HEIGHT }} onClick={this.mousePos}>
+                 <Score score={this.state.score} />
                 <Cloud clouds={this.clouds}/>
                 <Coin coins={this.coins}/>
                 <Player x={this.state.x} y={this.state.y} direction={this.state.direction}/>
-                <Score score={this.state.score} />
             </div>
         );
     }
@@ -154,8 +154,8 @@ class LiveGame extends React.Component {
     }
 
     ceillingCollide() {
-        if (this.state.y >= Constants.TOP) {
-            this.setState((state, props) => ({ gravity: 0, y: Constants.TOP }));
+        if (this.state.y >= Constants.TOP ) {
+            this.setState((state, props) => ({ gravity: 0, y: Constants.TOP}));
         }
     }
 
