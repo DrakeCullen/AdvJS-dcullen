@@ -20,7 +20,7 @@ All my test cases passed!
 
 <br/>
 
-![alt text](/src/imgs/test_cases.png)
+![alt text](src/imgs/test_cases.png)
 
 <br/>
 
@@ -28,4 +28,4 @@ Here is a quick GIF of the game running:
 
 <br/>
 
-![alt text](/src/imgs/gameplay.gif)
+![alt text](src/imgs/gameplay.gif)
