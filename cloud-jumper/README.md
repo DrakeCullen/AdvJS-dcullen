@@ -12,7 +12,7 @@ To install the game, clone this github repository. Next, run "npm install". You 
 
 <br/>
 
-Move the player left and right by holding the arrow keeps. Land on clouds to jump, and grab coins to earn points!
+Move the player left and right by holding the arrow keys. Land on clouds to jump, and grab coins to earn points!
 
 <br/>
 
