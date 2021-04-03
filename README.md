@@ -37,7 +37,7 @@
 | Self Grade              | 100                                        |
 | Notes                 | All requirements were met. I choose problems with difficulties 2.7 and 3.0.
 
-## Project #
+## Project 3
 
 | Name                | Value                                                                 |
 | -------------       | -------------                                                         |
