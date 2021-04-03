@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import * as Constants from './Constants.js';
 import LiveGame from './LiveGame.js';
-import CloudImage from './cloudImage.png';
+import CloudImage from '../imgs/cloudImage.png';
 
 class Cloud extends React.Component {
     constructor(props) {
@@ -16,7 +16,7 @@ class Cloud extends React.Component {
             left: `${data[0].left}px`,
             bottom: `${data[1].right}px`,
 
-        }}><img className="cloud" src={window.location.origin + '/cloudImage.png'}></img></div>);
+        }}><img className="cloud" src={window.location.origin + '/cloudImage.png'} alt="cloud"></img></div>);
 
         return (
             cloudDivs

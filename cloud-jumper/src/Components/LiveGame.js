@@ -21,10 +21,10 @@ class LiveGame extends React.Component {
     render() {
         return (
             <div className="game-area" style={{ width: Constants.WIDTH, height: Constants.HEIGHT }} onClick={this.mousePos}>
-                 <Score score={this.state.score} />
-                <Cloud clouds={this.clouds}/>
-                <Coin coins={this.coins}/>
-                <Player x={this.state.x} y={this.state.y} direction={this.state.direction}/>
+                <Score score={this.state.score} />
+                <Cloud clouds={this.clouds} />
+                <Coin coins={this.coins} />
+                <Player x={this.state.x} y={this.state.y} direction={this.state.direction} />
             </div>
         );
     }
@@ -39,9 +39,9 @@ class LiveGame extends React.Component {
     }
 
     onKeyDown = (e) => {
-        if (e.keyCode == '37' && this.state.x > Constants.LEFT) 
+        if (e.keyCode == '37' && this.state.x > Constants.LEFT)
             this.setState((state, props) => ({ x: state.x - 10, direction: 'left' }));
-        else if (e.keyCode == '39' && this.state.x < Constants.RIGHT - Constants.PLAYER_WIDTH) 
+        else if (e.keyCode == '39' && this.state.x < Constants.RIGHT - Constants.PLAYER_WIDTH)
             this.setState((state, props) => ({ x: state.x + 10, direction: 'right' }));
     }
 
@@ -82,20 +82,20 @@ class LiveGame extends React.Component {
     }
 
     gravityUpdate(e) {
-        if(this.counter == 0) {
+        if (this.counter == 0) {
             this.setState((state, props) => ({ y: state.y - state.gravity }));
             this.cloudCollision();
             this.moveCloudsUp();
             this.moveCoinsUp();
         }
         else {
-            if (this.counter == Constants.COUNTER) 
-                this.setState((state, props) => ({ gravity: state.gravity*-1 }));
+            if (this.counter == Constants.COUNTER)
+                this.setState((state, props) => ({ gravity: state.gravity * -1 }));
             else if (this.counter == 1)
                 this.setState((state, props) => ({ gravity: Constants.GRAVITY }));
             this.moveCloudsDown();
             this.moveCoinsDown();
-            this.setState((state, props) => ({ y: state.y - state.gravity*1.5 }));
+            this.setState((state, props) => ({ y: state.y - state.gravity * 1.5 }));
             this.counter--;
         }
         this.coinCollision();
@@ -104,41 +104,41 @@ class LiveGame extends React.Component {
     }
 
     moveCloudsDown() {
-        for (let cloud of this.clouds) { 
-            cloud[1].right-=2;
-            if(cloud[1].right <= Constants.BOTTOM)
-                this.cloudOffBottom(cloud);;  
+        for (let cloud of this.clouds) {
+            cloud[1].right -= 2;
+            if (cloud[1].right <= Constants.BOTTOM)
+                this.cloudOffBottom(cloud);;
         }
     }
 
     moveCloudsUp() {
-        for (let cloud of this.clouds) { 
-            cloud[1].right+=1.2;
-           // if(cloud[1].right >= Constants.TOP)
-               // this.cloudOffBottom(cloud);;  
+        for (let cloud of this.clouds) {
+            cloud[1].right += 1.2;
+            // if(cloud[1].right >= Constants.TOP)
+            // this.cloudOffBottom(cloud);;  
         }
     }
 
     moveCoinsDown() {
-        for (let coin of this.coins) { 
-            coin[1].right-=2;
-            if(coin[1].right <= Constants.BOTTOM)
+        for (let coin of this.coins) {
+            coin[1].right -= 2;
+            if (coin[1].right <= Constants.BOTTOM)
                 this.updateCoin(coin);
         }
     }
 
     moveCoinsUp() {
-        for (let coin of this.coins) { 
-            coin[1].right+=1.2;
+        for (let coin of this.coins) {
+            coin[1].right += 1.2;
             //if(coin[1].right >= Constants.TOP + Constants.COIN_RADIUS)
-              //  this.coinRandom(coin);
+            //  this.coinRandom(coin);
         }
     }
 
     gameOver() {
         if (this.state.y <= Constants.BOTTOM) {
             this.setState((state, props) => ({ gravity: 0 }));
-            if(this.state.score >= this.props.scores[4].score) {
+            if (this.state.score >= this.props.scores[4].score) {
                 console.log("win")
                 this.props.scores[4].score = this.state.score;
                 //alert(this.props.scores[4].score)
@@ -154,8 +154,8 @@ class LiveGame extends React.Component {
     }
 
     ceillingCollide() {
-        if (this.state.y >= Constants.TOP ) {
-            this.setState((state, props) => ({ gravity: 0, y: Constants.TOP}));
+        if (this.state.y >= Constants.TOP) {
+            this.setState((state, props) => ({ gravity: 0, y: Constants.TOP }));
         }
     }
 
@@ -172,46 +172,46 @@ class LiveGame extends React.Component {
     coinCollision() {
         for (let i = 0; i < this.coins.length; i++) {
             if (this.state.x >= this.coins[i][0].left - Constants.PLAYER_WIDTH && this.state.x <= this.coins[i][0].left + Constants.COIN_RADIUS && this.state.y >= this.coins[i][1].right - Constants.COIN_RADIUS && this.state.y <= this.coins[i][1].right + Constants.COIN_RADIUS) {
-                this.setState((state, props) => ({ score: state.score + 10}));
+                this.setState((state, props) => ({ score: state.score + 10 }));
                 this.updateCoin(this.coins[i]);
-                this.coins[i][1].right = Math.floor(Math.random() * (window.innerHeight - Constants.BOTTOM/2) + Constants.BOTTOM)
+                this.coins[i][1].right = Math.floor(Math.random() * (window.innerHeight - Constants.BOTTOM / 2) + Constants.BOTTOM)
                 this.validCoin(this.coins[i], i);
             }
         }
     }
 
     validCloud(cloud, i) {
-        while(!this.checkAvailable(cloud, i)) {
+        while (!this.checkAvailable(cloud, i)) {
             this.cloudOffBottom(cloud)
         }
     }
 
     validCoin(coin, i) {
-        while(!this.coinAvailable(coin, i)) {
+        while (!this.coinAvailable(coin, i)) {
             this.updateCoin(coin)
         }
     }
 
     cloudOffBottom(cloud) {
-        this.setState((state, props) => ({ cloudMove: state.cloudMove++}));
+        this.setState((state, props) => ({ cloudMove: state.cloudMove++ }));
         cloud[0].left = Math.floor(Math.random() * (this.xMax - this.xMin) + this.xMin);
         cloud[1].right = window.innerHeight;//Math.floor(Math.random() * (window.innerHeight - 30) +30) * -1;//(-100 -500) -500);
     }
 
     cloudOffTop(cloud) {
-        this.setState((state, props) => ({ cloudMove: state.cloudMove++}));
+        this.setState((state, props) => ({ cloudMove: state.cloudMove++ }));
         cloud[0].left = Math.floor(Math.random() * (this.xMax - this.xMin) + this.xMin);
         cloud[1].right = Constants.BOTTOM - 100;
     }
 
     updateCoin(coin) {
-        this.setState((state, props) => ({ cloudMove: state.cloudMove++}));
+        this.setState((state, props) => ({ cloudMove: state.cloudMove++ }));
         coin[0].left = Math.floor(Math.random() * (this.xMax - this.xMin) + this.xMin);
         coin[1].right = window.innerHeight;
     }
 
     coinRandom(coin) {
-        this.setState((state, props) => ({ cloudMove: state.cloudMove++}));
+        this.setState((state, props) => ({ cloudMove: state.cloudMove++ }));
         coin[0].left = Math.floor(Math.random() * (this.xMax - this.xMin) + this.xMin);
         coin[1].right = Math.floor(Math.random() * (this.yMax - this.yMin) + this.yMin);
 
@@ -219,7 +219,7 @@ class LiveGame extends React.Component {
 
     checkAvailable(cloud, i) {
         for (let j = 0; j < this.clouds.length; j++) {
-            if(Math.abs(this.clouds[i][0].left - this.clouds[j][0].left) <= Constants.CLOUD_WIDTH && i != j  && Math.abs(this.clouds[i][1].right - this.clouds[j][1].right) <= Constants.CLOUD_HEIGHT)
+            if (Math.abs(this.clouds[i][0].left - this.clouds[j][0].left) <= Constants.CLOUD_WIDTH && i != j && Math.abs(this.clouds[i][1].right - this.clouds[j][1].right) <= Constants.CLOUD_HEIGHT)
                 return false;
         }
         return true;
@@ -227,7 +227,7 @@ class LiveGame extends React.Component {
 
     coinAvailable(coin, i) {
         for (let j = 0; j < this.coins.length; j++) {
-            if(Math.abs(this.coins[i][0].left - this.coins[j][0].left) <= Constants.COIN_RADIUS && i != j  && Math.abs(this.coins[i][1].right - this.coins[j][1].right) <= Constants.COIN_RADIUS)
+            if (Math.abs(this.coins[i][0].left - this.coins[j][0].left) <= Constants.COIN_RADIUS && i != j && Math.abs(this.coins[i][1].right - this.coins[j][1].right) <= Constants.COIN_RADIUS)
                 return false;
         }
         return true;

@@ -15,7 +15,7 @@ class Coin extends React.Component {
             left: `${data[0].left}px`,
             bottom: `${data[1].right}px`,
 
-        }}><img className="coin" src={window.location.origin + '/coin.png'}></img></div>);
+        }}><img className="coin" src={window.location.origin + '/coin.png'} alt="coin"></img></div>);
 
         return (
             coinDivs

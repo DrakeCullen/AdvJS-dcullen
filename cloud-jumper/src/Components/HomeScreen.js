@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import * as Constants from './Constants.js';
+import homeJSON from './Data/homePage.json';
 
 class HomeScreen extends React.Component {
     constructor(props) {
@@ -9,9 +10,9 @@ class HomeScreen extends React.Component {
     render() {
         return (
             <div className="game-area text-center" style={{ width: Constants.WIDTH, height: Constants.HEIGHT }}>
-                <h1 className="title mt-3">Cloud Jumper</h1>
-                <h2 className="leader-small mt-3">Created By:</h2>
-                <h2 className="leader-small mt-2">Drake Cullen</h2>
+                <h1 className="title mt-3">{homeJSON.title}</h1>
+                <h2 className="leader-small mt-3">{homeJSON.createdBy}</h2>
+                <h2 className="leader-small mt-2">{homeJSON.developer}</h2>
                 <img className="bunny-logo mt-4" src={window.location.origin + '/bunny-right.png'}></img>
                 <div>
                     <button type="button" className="btn btn-success btn-lg mt-4" onClick={this.props.startGame}>Play</button>
